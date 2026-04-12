@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>鸡毛换糖精神 | 义乌 · 从拨浪鼓到世界超市</title>
+    <style>
+        /* ========== CSS变量 ========== */
+        :root {
+            --primary-blue: #0F2B5B;
+            --primary-red: #C9190B;
+            --warm-yellow: #F5EFE0;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #F8F8F8;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ========== 全局重置 & 基础 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(180deg, #FDFBF7 0%, #F8F8F8 100%);
+            font-family: 'SimSun', '宋体', 'Times New Roman', serif;
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .nav-menu, .logo-text, .section-title, .card-title, .table-header, .timeline-year, .footer-slogan {
+            font-family: 'PingFang SC', 'Microsoft YaHei', '黑体', 'Helvetica Neue', sans-serif;
+            font-weight: 600;
+        }
+
+        .small-text, .search-box input::placeholder, .img-caption, .footer-links {
+            font-family: 'Microsoft YaHei', '微软雅黑', 'Segoe UI', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 修复fade-in空白bug：兜底默认可见 */
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transform: translateZ(0);
+        }
+
+        /* ========== 顶部进度条 ========== */
+        #progressBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-blue));
+            z-index: 10000;
+            transition: width 0.1s ease;
+        }
+
+        /* ========== 顶部导航栏 ========== */
+        .top-nav {
+            position: fixed;
+            top: 3px;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a3a6b 100%);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .top-nav.scrolled {
+            height: 64px;
+            box-shadow: var(--shadow-lg);
+        }
+        .nav-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-icon {
+            font-size: 36px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-menu li a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+            padding: 4px 0;
+            transition: var(--transition);
+        }
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: var(--white);
+        }
+        .nav-menu li a:hover::after,
+        .nav-menu li a.active::after {
+            width: 100%;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .search-box input {
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            font-size: 14px;
+            width: 200px;
+            outline: none;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        .search-box input:focus {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.4);
+            width: 220px;
+        }
+        .quick-link {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 16px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        .quick-link:hover {
+            background: var(--primary-red);
+            border-color: var(--primary-red);
+            color: var(--white);
+        }
+        .mobile-menu-btn {
+            display: none;
+            font-size: 30px;
+            color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background: linear-gradient(180deg, var(--primary-blue) 0%, #1a3a6b 100%);
+            position: absolute;
+            top: 72px;
+            left: 0;
+            width: 100%;
+            padding: 24px;
+            gap: 18px;
+            z-index: 999;
+            box-shadow: var(--shadow-lg);
+        }
+        .mobile-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: var(--transition);
+        }
+        .mobile-nav a:hover {
+            color: var(--primary-red);
+            padding-left: 8px;
+        }
+
+        /* ========== 首屏banner ========== */
+        .hero {
+            margin-top: 75px;
+            position: relative;
+            width: 100%;
+            height: 58vh;
+            min-height: 480px;
+            overflow: hidden;
+            border-radius: 0 0 30px 30px;
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('1 - 历史渊源 - 敲糖帮起源 1.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-title {
+            color: var(--white);
+            font-size: 42px;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            padding: 0 20px;
+        }
+        .hero-subtitle {
+            color: var(--white);
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero-bottom-banner {
+            background: linear-gradient(135deg, var(--warm-yellow) 0%, #F0E6D2 100%);
+            padding: 22px 0;
+            text-align: center;
+            margin-top: 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+        .hero-bottom-banner p {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--primary-red);
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* ========== 主内容区 ========== */
+        .main-layout {
+            max-width: 1400px;
+            margin: 48px auto 0;
+            padding: 0 20px;
+            position: relative;
+        }
+        .main-content {
+            width: 100%;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px 44px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.04);
+            overflow: visible;
+        }
+        .content-block {
+            margin-bottom: 64px;
+            /* 关键修复：确保锚点跳转不被导航栏遮挡 */
+            scroll-margin-top: 100px !important;
+            padding-top: 1px; /* 防止margin塌陷 */
+        }
+        .block-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 32px;
+            border-left: 6px solid var(--primary-red);
+            padding-left: 20px;
+            position: relative;
+        }
+        .block-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 20px;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-red) 0%, transparent 100%);
+            border-radius: 2px;
+        }
+
+        /* 典型企业板块专属样式 */
+        .enterprise-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: #fdfbf7;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+        .enterprise-title {
+            font-size: 24px;
+            color: var(--primary-red);
+            margin: 0 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--warm-yellow);
+        }
+        .enterprise-subtitle {
+            font-size: 20px;
+            color: var(--primary-blue);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+        .enterprise-paragraph {
+            margin: 15px 0;
+            line-height: 1.9;
+            color: var(--text-dark);
+            text-align: justify;
+        }
+
+        .spirit-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .spirit-table th {
+            background: linear-gradient(135deg, var(--warm-yellow) 0%, #F0E6D2 100%);
+            font-weight: 700;
+            font-size: 17px;
+            padding: 18px 20px;
+            text-align: left;
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-red);
+        }
+        .spirit-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #EAE6DF;
+            font-size: 15px;
+            vertical-align: top;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .spirit-table tr:last-child td {
+            border-bottom: none;
+        }
+        .spirit-table tr:nth-child(even) {
+            background-color: #FDFBF7;
+        }
+        .spirit-table tr:hover td {
+            background-color: rgba(201, 25, 11, 0.05);
+        }
+
+        .two-columns {
+            display: flex;
+            gap: 36px;
+            flex-wrap: wrap;
+        }
+        .col {
+            flex: 1;
+            min-width: 260px;
+        }
+        .sub-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-red);
+            padding-left: 14px;
+            background: rgba(201, 25, 11, 0.05);
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-radius: 0 8px 8px 0;
+        }
+        .history-text p {
+            margin-bottom: 16px;
+            line-height: 1.9;
+            color: var(--text-dark);
+        }
+        .timeline-evolve {
+            list-style: none;
+        }
+        .timeline-evolve li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 24px;
+            padding-top: 4px;
+        }
+        .timeline-evolve li:before {
+            content: "◆";
+            color: var(--primary-red);
+            font-size: 12px;
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+        .time-year {
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        .img-placeholder {
+            width: 100%;
+            border-radius: 12px;
+            margin: 16px 0;
+            box-shadow: var(--shadow-md);
+            min-height: 180px;
+            object-fit: cover;
+            background-color: #EAE6DF;
+            transition: var(--transition);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="%23F5EFE0" width="400" height="300"/><text x="50%" y="45%" text-anchor="middle" font-family="Microsoft YaHei" font-size="40" fill="%23C9190B">🥁</text><text x="50%" y="65%" text-anchor="middle" font-family="Microsoft YaHei" font-size="16" fill="%23666">鸡毛换糖主题图片</text></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        .img-placeholder:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .img-caption {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .person-card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            position: relative;
+        }
+        .person-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .card-category {
+            background: linear-gradient(135deg, var(--warm-yellow) 0%, #F0E6D2 100%);
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary-red);
+            padding: 14px;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+        .card-img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            background-color: #ddd;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250"><rect fill="%23ddd" width="400" height="250"/><text x="50%" y="50%" text-anchor="middle" font-family="Microsoft YaHei" font-size="30" fill="%23999">👤</text><text x="50%" y="70%" text-anchor="middle" font-family="Microsoft YaHei" font-size="14" fill="%23999">人物照片</text></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-info {
+            padding: 20px;
+        }
+        .card-info h4 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: var(--primary-blue);
+        }
+        .card-info p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ========== 人物故事弹窗样式 ========== */
+        .story-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+        .story-modal.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .story-content {
+            background: var(--white);
+            border-radius: 24px;
+            max-width: 800px;
+            max-height: 85vh;
+            width: 100%;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9);
+            transition: var(--transition);
+            position: relative;
+        }
+        .story-modal.visible .story-content {
+            transform: scale(1);
+        }
+        .story-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a3a6b 100%);
+            color: var(--white);
+            padding: 28px 32px;
+            border-radius: 24px 24px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .story-header h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .story-header .story-category {
+            font-size: 14px;
+            opacity: 0.9;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        .story-close {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            font-size: 28px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: var(--transition);
+            line-height: 1;
+        }
+        .story-close:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+        .story-body {
+            padding: 32px;
+            font-size: 16px;
+            line-height: 2;
+            color: var(--text-dark);
+        }
+        .story-body p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .story-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-market {
+            position: relative;
+            padding-left: 40px;
+            margin: 36px 0;
+        }
+        .timeline-market:before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary-red) 0%, #F0E6D2 100%);
+            border-radius: 2px;
+        }
+        .market-item {
+            position: relative;
+            margin-bottom: 36px;
+            padding: 20px;
+            background: #FDFBF7;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-red);
+            transition: var(--transition);
+        }
+        .market-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+        .market-year {
+            position: absolute;
+            left: -56px;
+            top: 24px;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, #a81509 100%);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: var(--shadow-md);
+        }
+        .market-content {
+            margin-left: 8px;
+            padding-bottom: 4px;
+        }
+        .market-name {
+            font-weight: 700;
+            font-size: 19px;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+        .market-desc {
+            font-size: 15px;
+            margin: 8px 0;
+            color: var(--text-light);
+        }
+        .market-img {
+            max-width: 85%;
+            border-radius: 12px;
+            margin-top: 16px;
+            background-color: #EAE6DF;
+            box-shadow: var(--shadow-sm);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250"><rect fill="%23EAE6DF" width="400" height="250"/><text x="50%" y="50%" text-anchor="middle" font-family="Microsoft YaHei" font-size="30" fill="%23C9190B">🏪</text><text x="50%" y="70%" text-anchor="middle" font-family="Microsoft YaHei" font-size="14" fill="%23666">市场照片</text></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        .exp-box {
+            background: linear-gradient(135deg, #FDFBF7 0%, #F8F8F8 100%);
+            padding: 28px;
+            border-radius: 20px;
+            margin-top: 36px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: var(--shadow-sm);
+        }
+        .exp-box h4 {
+            font-size: 20px;
+            color: var(--primary-red);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        .exp-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            list-style: none;
+        }
+        .exp-list li {
+            width: calc(50% - 16px);
+            font-size: 15px;
+            position: relative;
+            padding-left: 24px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .exp-list li:before {
+            content: "✦";
+            color: var(--primary-red);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 14px;
+        }
+
+        .practice-grid {
+            display: flex;
+            gap: 36px;
+            flex-wrap: wrap;
+        }
+        .practice-card {
+            flex: 1;
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+        .practice-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .practice-title {
+            background: linear-gradient(135deg, var(--warm-yellow) 0%, #F0E6D2 100%);
+            text-align: center;
+            padding: 18px;
+            font-weight: 700;
+            font-size: 19px;
+            color: var(--primary-red);
+            letter-spacing: 1px;
+        }
+        .practice-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background-color: #D9CFC2;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="225" viewBox="0 0 400 225"><rect fill="%23D9CFC2" width="400" height="225"/><text x="50%" y="50%" text-anchor="middle" font-family="Microsoft YaHei" font-size="30" fill="%230F2B5B">💡</text><text x="50%" y="70%" text-anchor="middle" font-family="Microsoft YaHei" font-size="14" fill="%23666">创新实践照片</text></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        .practice-text {
+            padding: 24px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .quote-block {
+            margin-top: 24px;
+            font-style: italic;
+            border-left: 4px solid var(--primary-red);
+            padding: 20px 24px;
+            background: linear-gradient(135deg, #FEF7E8 0%, #FDFBF7 100%);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            color: var(--primary-blue);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a3a6b 100%);
+            margin-top: 80px;
+            padding: 48px 20px 28px;
+            text-align: center;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        }
+        .footer-slogan {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .footer-copyright {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+        .footer-links {
+            margin-top: 24px;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 13px;
+            margin: 0 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .back2top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, #a81509 100%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 99;
+            color: var(--white);
+            font-size: 22px;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            transform: translateY(20px);
+        }
+        .back2top.visible {
+            opacity: 0.9;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back2top:hover {
+            opacity: 1;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(201, 25, 11, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                width: 100%;
+                padding: 32px 28px;
+            }
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .two-columns {
+                flex-direction: column;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .hero-bottom-banner p {
+                font-size: 24px;
+            }
+            .hero-title {
+                font-size: 32px;
+            }
+            .market-img {
+                max-width: 100%;
+            }
+            .hero {
+                border-radius: 0 0 20px 20px;
+                height: 50vh;
+                min-height: 420px;
+                margin-top: 75px;
+            }
+            .story-content {
+                max-width: 90%;
+            }
+            .enterprise-section {
+                padding: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .exp-list li {
+                width: 100%;
+            }
+            .block-title {
+                font-size: 24px;
+            }
+            .hero {
+                height: 45vh;
+                min-height: 360px;
+            }
+            .main-content {
+                padding: 24px 20px;
+                border-radius: 16px;
+            }
+            .hero-bottom-banner p {
+                font-size: 20px;
+            }
+            .hero-title {
+                font-size: 26px;
+            }
+            .back2top {
+                width: 44px;
+                height: 44px;
+                bottom: 24px;
+                right: 24px;
+            }
+            .story-header {
+                padding: 20px 24px;
+            }
+            .story-header h3 {
+                font-size: 22px;
+            }
+            .story-body {
+                padding: 24px;
+            }
+            .enterprise-title {
+                font-size: 20px;
+            }
+            .enterprise-subtitle {
+                font-size: 18px;
+            }
+            .enterprise-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部进度条 -->
+<div id="progressBar"></div>
+
+<div class="top-nav" id="topNav">
+    <div class="nav-container">
+        <div class="logo-area">
+            <span class="logo-icon">🥁</span>
+            <span class="logo-text">鸡毛换糖精神</span>
+        </div>
+        <!-- 精准锚点导航：已删除「关于我们」，确保href与下方id完全一致 -->
+        <ul class="nav-menu">
+            <li><a href="#spirit-core">精神内涵</a></li>
+            <li><a href="#history-evolve">历史溯源与精神演变</a></li>
+            <li><a href="#inheritance">传承发展</a></li>
+            <li><a href="#people">人物谱系</a></li>
+            <li><a href="#yiwu-change">义乌蝶变</a></li>
+            <li><a href="#innovation">创新实践</a></li>
+            <li><a href="#enterprises">典型企业</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索关键词 (如: 谢高华, 吉利)">
+            </div>
+            <a href="#" class="quick-link">义乌官网</a>
+        </div>
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</div>
+    </div>
+    <!-- 移动端精准锚点导航 -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#spirit-core">精神内涵</a>
+        <a href="#history-evolve">历史溯源与精神演变</a>
+        <a href="#inheritance">传承发展</a>
+        <a href="#people">人物谱系</a>
+        <a href="#yiwu-change">义乌蝶变</a>
+        <a href="#innovation">创新实践</a>
+        <a href="#enterprises">典型企业</a>
+    </div>
+</div>
+
+<!-- 首屏banner -->
+<div class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">鸡毛换糖精神 · 浙商的根与魂</h1>
+        <p class="hero-subtitle">从拨浪鼓到世界超市，从草根创业到全球标杆</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="hero-bottom-banner fade-in">
+        <p>从拨浪鼓到世界超市，鸡毛换糖精神永流传</p>
+    </div>
+</div>
+
+<!-- 主内容区 -->
+<div class="main-layout">
+    <main class="main-content">
+        <!-- 1. 精神内涵板块 (id: spirit-core) -->
+        <div id="spirit-core" class="content-block fade-in">
+            <div class="block-title">鸡毛换糖精神的核心内涵</div>
+            <table class="spirit-table">
+                <thead>
+                    <tr>
+                        <th>精神特质</th>
+                        <th>具体阐释</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>敢闯敢创、勇于开拓</strong></td>
+                        <td>不满足于现状，敢于走南闯北。在信息闭塞、交通不便的年代，义乌人率先冲破地域限制，“挑着货担走天下”，足迹遍布全国甚至海外，在没有路的地方蹚出了商机。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>百折不挠、吃苦耐劳</strong></td>
+                        <td>“走遍千山万水、说尽千言万语、想尽千方百计、吃尽千辛万苦”。即便条件极其艰苦，住桥洞、啃干粮也坚持不懈，这种“四千精神”是浙商精神的生动写照。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>毫厘争取、积少成多</strong></td>
+                        <td>不轻视任何微小的利润，生意不论大小，商品不分贵贱。从一根鸡毛赚1厘钱、一颗纽扣赚2厘钱做起，凭借“聚沙成塔、集腋成裘”的韧性，最终汇聚成年进出口总值超8000亿的商业帝国。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>义利并举、诚信包容</strong></td>
+                        <td>坚守“出六进四”（利润六分让给别人，四分留给自己）的经商信条，讲究先义后利，做生意即交朋友。以诚信赢得口碑，以包容汇聚天下客商，打造“买全球、卖全球”的世界超市。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 2. 历史溯源与精神演变 (id: history-evolve) -->
+        <div id="history-evolve" class="content-block fade-in">
+            <div class="block-title">历史溯源与精神凝练演变</div>
+            <div class="two-columns">
+                <div class="col">
+                    <div class="sub-title">历史溯源</div>
+                    <div class="history-text">
+                        <p><strong>敲糖帮起源：</strong>“鸡毛换糖”源于“敲糖帮”。早在明清时期，义乌就出现了肩挑糖担、手摇拨浪鼓、走街串巷换取鸡毛以肥田的“敲糖帮”。这不仅是一种商业模式，更形成了分工明确、利益共享的早期商业组织。这种“抱团互助”的传统，与浙商“抱团发展”、“块状经济”的组织特征一脉相承。</p>
+                        
+                        <img class="img-placeholder" src="1 - 历史渊源 - 敲糖帮起源 1.png" alt="敲糖帮老照片" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+                        <div class="img-caption">明清货郎担 · 鸡毛换糖起源</div>
+
+                        <p><strong>义乌古称“乌伤”，源于乌鸦为孝子衔土筑坟的传说，这座城市有重孝义、讲忠义的传统。唐代骆宾王为匡扶李唐正统，写下《讨武曌檄》。北宋名将宗泽在国难当头时力主抗金，临终前仍三呼“过河”，其“忠简”的谥号成为义乌宗氏家训。</p>
+                        
+                        <img class="img-placeholder" src="1 - 历史渊源 - 宗泽忠义文化 1.png" alt="宗泽画像" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+                        <div class="img-caption">宗泽 · 义乌忠义文化代表</div>
+
+                        <p>明朝嘉靖年间，戚继光招募以义乌矿工和农民为主力的士兵，组建了令倭寇闻风丧胆的“义乌兵”。他们勇敢耐劳、善于组织，其善走游动的特点，也被认为是后来“敲糖帮”走南闯北的渊源之一。</p>
+                        
+                        <img class="img-placeholder" src="1 - 历史渊源 - 义乌兵历史渊源 1.png" alt="义乌兵历史" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+                        <div class="img-caption">义乌兵 · 敲糖帮精神的历史渊源</div>
+
+                        <p><strong>改革正名：</strong>20世纪70年代末，随着“实践是检验真理的唯一标准”大讨论的开展，义乌农民“弃农经商”的行为开始被重新审视。1979年，时任义乌县委办公室工作人员的杨守春在《浙江日报》发表《“鸡毛换糖”的拨浪鼓又响了》一文，为这一行为正名，被称为“义乌小商品市场的第一声呐喊”。</p>
+                        
+                        <img class="img-placeholder" src="1 - 历史渊源 - 浙江日报报道原文 1.png" alt="浙江日报报道原文" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+                        <div class="img-caption">《“鸡毛换糖”的拨浪鼓又响了》原文</div>
+
+                        <p>此后，在谢高华等一批领导干部支持下，义乌“兴商建县”的战略得以确立，为“鸡毛换糖”精神的发扬提供了时代舞台。这一时期，浙南的温州、台州等地也出现了类似的个体经济萌芽，共同构成了改革开放初期浙江民营经济的勃发图景。</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="sub-title">精神凝练与升级</div>
+                    <ul class="timeline-evolve">
+                        <li><span class="time-year">1989年</span>杨守春在总结提炼义乌精神时，首次提出了“勤耕、好学、刚正、勇为”八个字。这八个字与浙商精神中“勤奋”、“好学”、“敢为”的特质高度吻合。</li>
+                        <li><span class="time-year">2008年</span>加入“诚信、包容”，形成十六字城市精神：<strong>“勤耕好学、刚正勇为、诚信包容”</strong>，反映从敢闯敢拼到规范开放融合的转型。</li>
+                        <li><span class="time-year">新时代</span>在全球化背景下，精神内核延伸为数字时代的守正创新，成为浙商精神的活态样本。</li>
+                    </ul>
+                    
+                    <img class="img-placeholder" src="2 - 精神演变 - 义乌十六字精神 1.png" alt="义乌十六字精神" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+                    <div class="img-caption">义乌十六字城市精神</div>
+
+                    <!-- 3. 传承发展 (id: inheritance) -->
+                    <div id="inheritance" class="sub-title" style="margin-top:36px;">当代传承</div>
+                    <ul class="timeline-evolve">
+                        <li><span class="time-year">2026年</span>央视春晚义乌分会场，向全国展示鸡毛换糖精神的新时代活力</li>
+                        <li><span class="time-year">近年</span>三代企业家重走商路，传承敲糖帮的创业精神</li>
+                    </ul>
+                    <img class="img-placeholder" src="3 - 当代传承 - 2026 春晚义乌分会场.png" alt="2026春晚义乌分会场" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+                    <div class="img-caption">2026央视春晚义乌分会场</div>
+                    <img class="img-placeholder" src="3 - 当代传承 - 三代企业家重走商路.png" alt="三代企业家重走商路" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+                    <div class="img-caption">三代企业家重走商路</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 人物谱系 (id: people) -->
+        <div id="people" class="content-block fade-in">
+            <div class="block-title">精神的践行者与传承者</div>
+            <div class="card-grid">
+                <div class="person-card" data-category="改革推动者" data-name="谢高华" data-story='1982年，刚到任的义乌县委书记谢高华在县委大院门口被商户冯爱倩围住，质问为什么不让他们做生意。经过深入调研，他看到了老百姓“穷则思变”的渴望，表态：“如果出了问题我负责，宁可不要‘乌纱帽’”。在谢高华的推动下，义乌开放了湖清门小商品市场。他还制定了“容许农民经商、容许长途贩运、容许开放城乡市场、允许多渠道竞争”的“四个容许”政策，为民营经济提供了政策保障。1984年，谢高华提出了“兴商建县”的发展战略，确立商业为义乌经济发展的龙头地位。这一战略后被历届党委政府坚持至今，成为义乌发展的主脉络。谢高华的“为官一任、造福一方”的作为，体现了浙商发展过程中“政府有为”与“市场有效”结合的“义乌经验”。'>
+                    <div class="card-category">改革推动者</div>
+                    <img class="card-img" src="5 - 人物谱系 - 谢高华改革先锋证书.png" alt="谢高华" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#ddd'">
+                    <div class="card-info"><h4>谢高华</h4><p>义乌小商品市场的开创者，提出“兴商建县”战略，为鸡毛换糖精神正名。</p></div>
+                </div>
+                <div class="person-card" data-category="实业家代表" data-name="翁荣金" data-story='1986年，他借了几万元去新疆卖人工饰品，在火车上站了四天四夜，腿肿得迈不开步。到了乌鲁木齐后，发现市场行情已变，最后亏了1万多元，这是他当时全部的身家。这次打击后，他总结了做生意的原则，从代理广东品牌开始，1995年开办自己的袜厂，5年后成为“中国袜业大王”，旗下袜子年产量超10亿双。他是电视剧《鸡毛飞上天》中主角陈江河的原型人物之一。他的经历体现了浙商“百折不挠”、“从贸易到实业”的典型发展路径。'>
+                    <div class="card-category">实业家代表</div>
+                    <img class="card-img" src="5 - 人物谱系 - 翁荣金创业历程.png" alt="翁荣金" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#ddd'">
+                    <div class="card-info"><h4>翁荣金</h4><p>中国袜业大王，从鸡毛换糖的货郎成长为实业家，是《鸡毛飞上天》主角原型。</p></div>
+                </div>
+                <div class="person-card" data-category="敲糖帮先行者" data-name="冯爱倩" data-story='1980年11月，义乌县工商局尝试性颁发7000余份“小百货敲糖换取鸡毛什肥临时许可证”。拿到许可证第一天，冯爱倩去百货公司进纽扣、皮筋、别针，拿到廿三里集市上卖，净赚6元多，相当于她当厨师一周的工资。她是改革开放后义乌第一批个体经营者的代表，她的“敢为人先”拉开了义乌市场的序幕。'>
+                    <div class="card-category">先行者代表</div>
+                    <img class="card-img" src="5 - 人物谱系 - 冯爱倩经营实拍.png" alt="冯爱倩" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#ddd'">
+                    <div class="card-info"><h4>冯爱倩</h4><p>义乌第一代商户代表，当面质问县委书记谢高华，推动了义乌市场的开放。</p></div>
+                </div>
+                <div class="person-card" data-category="新生代传承者" data-name="陈庆文" data-story='18岁挑起货郎担，从“鸡毛换糖”开始，后走出国门从事中加贸易，现致力于将经验传承给新一代浙商。他是浙商“走出去”、参与全球化竞争的早期代表，也体现了浙商“义利并举”、回馈乡梓的传统。'>
+                    <div class="card-category">新生代传承者</div>
+                    <img class="card-img" src="5 - 人物谱系 - 陈庆文人物实拍.png" alt="陈庆文" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#ddd'">
+                    <div class="card-info"><h4>陈庆文</h4><p>18岁挑起货郎担，后走出国门从事跨境贸易，将鸡毛换糖精神带向全球。</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 义乌蝶变 (id: yiwu-change) -->
+        <div id="yiwu-change" class="content-block fade-in">
+            <div class="block-title">从敲糖帮到世界超市的时代蝶变</div>
+            <div class="timeline-market">
+                <div class="market-item">
+                    <div class="market-year">1982</div>
+                    <div class="market-content">
+                        <div class="market-name">第一代：湖清门小商品市场</div>
+                        <div class="market-desc">义乌第一代马路市场，开放“四个容许”，首批摊位700余个，小商品萌芽。</div>
+                    </div>
+                </div>
+                <div class="market-item">
+                    <div class="market-year">1984</div>
+                    <div class="market-content">
+                        <div class="market-name">第二代：新马路市场</div>
+                        <div class="market-desc">正式更名义乌小商品市场，摊位激增到1800余个，成交额突破1000万元。</div>
+                    </div>
+                </div>
+                <div class="market-item">
+                    <div class="market-year">1986</div>
+                    <div class="market-content">
+                        <div class="market-name">第三代：城中路市场</div>
+                        <div class="market-desc">规模持续扩大，摊位4000余个，奠定全国龙头基础。</div>
+                    </div>
+                </div>
+                <div class="market-item">
+                    <div class="market-year">1992</div>
+                    <div class="market-content">
+                        <div class="market-name">第四代：篁园市场</div>
+                        <div class="market-desc">成交额10.25亿元，国务院授予“华夏第一大市”称号，摊位突破1万个。</div>
+                    </div>
+                </div>
+                <div class="market-item">
+                    <div class="market-year">2002</div>
+                    <div class="market-content">
+                        <div class="market-name">第五代：义乌国际商贸城</div>
+                        <div class="market-desc">全球单体面积最大小商品批发市场，7.5万个商位，210多万种商品，开启买全球卖全球。</div>
+                    </div>
+                </div>
+                <div class="market-item">
+                    <div class="market-year">2025+</div>
+                    <div class="market-content">
+                        <div class="market-name">第六代：全球数贸中心</div>
+                        <div class="market-desc">数字贸易为核心，AI赋能，跨境直播，迈向数字化新时代，目标年交易额超万亿。</div>
+                    </div>
+                </div>
+            </div>
+            <img class="img-placeholder" src="6 - 市场发展 - 六代市场更迭.png" alt="六代市场更迭" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#EAE6DF'">
+            <div class="img-caption">义乌市场六代更迭历程</div>
+        </div>
+
+        <!-- 6. 创新实践 (id: innovation) -->
+        <div id="innovation" class="content-block fade-in">
+            <div class="block-title">精神的当代创新实践</div>
+            <div class="practice-grid">
+                <div class="practice-card">
+                    <div class="practice-title">何斯路村 · 功德银行</div>
+                    <img class="practice-img" src="4 - 创新实践 - 何斯路村功德银行.png" alt="何斯路村功德银行" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#D9CFC2'">
+                    <div class="practice-text">将“抱团互助、义利并举”转化为功德积分治理模式。<strong>积分规则：</strong>村民做善事（如帮邻居、扫街道、捐物资）可获得1-10分积分，积分可兑换洗衣粉、肥皂等日用品，还可作为“道德信用”用于贷款审批。<strong>成效：</strong>全村超90%村民参与，邻里纠纷减少80%，成为全国乡村治理典范，彰显浙商“经世致用”的智慧。</div>
+                </div>
+                <div class="practice-card">
+                    <div class="practice-title">桐庐 · 鸡毛换糖垃圾分类店</div>
+                    <img class="practice-img" src="4 - 创新实践 - 桐庐垃圾分类店 1.png" alt="桐庐垃圾分类店" decoding="async" loading="lazy" onerror="this.style.backgroundColor='#D9CFC2'">
+                    <div class="practice-text">村民用可回收垃圾换取日用品，“毫厘争取、积少成多”的商业逻辑应用于环保领域。<strong>运营数据：</strong>该店每月回收废纸、塑料瓶等超5吨，兑换出牙刷、毛巾、盐等日用品超2000件，既减少了垃圾量，又让村民得到实惠，是社会治理的创新延伸。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 典型企业 (id: enterprises) - 精准锚点 -->
+        <div id="enterprises" class="content-block fade-in">
+            <div class="block-title">典型企业：鸡毛换糖精神的时代实践</div>
+            
+            <!-- 吉利控股集团 -->
+            <div class="enterprise-section">
+                <h3 class="enterprise-title">吉利控股集团：浙商务实精神驱动的全球汽车产业标杆</h3>
+                <p class="enterprise-paragraph">从台州一家生产冰箱零部件的小作坊起步，到跻身全球汽车产业核心阵营，吉利控股集团（以下简称“吉利”）的发展轨迹，完美诠释了鸡毛换糖文化中“积少成多、勇于开拓、灵活变通”的精神内核，成为浙商精神在制造业领域最生动的实践样本。其从低端零部件到全球汽车巨头的跨越，既是一部务实奋斗的创业史，也是一曲持续创新的转型赞歌。</p>
+                
+                <h4 class="enterprise-subtitle">一、精神传承：鸡毛换糖基因的现代演绎</h4>
+                <p class="enterprise-paragraph"><strong>（一）积少成多，筑牢产业根基</strong><br>
+                吉利的起点，是1986年李书福在台州创办的冰箱配件厂——这与鸡毛换糖“不以利小而不为”的务实逻辑一脉相承。在民营经济尚处萌芽的年代，李书福从最简单的零部件加工切入，凭借“做小生意、赚稳钱”的经营思路，逐步积累原始资本与产业经验。1994年进军摩托车行业，1997年正式跨界汽车制造，每一步都遵循“深耕主业、稳步扩张”的原则，拒绝盲目多元化。</p>
+                <p class="enterprise-paragraph">这种“积少成多”的精神，在吉利发展历程中体现得淋漓尽致：从生产低端经济型轿车满足大众代步需求，到逐步推出中高端产品；从单一品牌运作，到构建多品牌矩阵；从聚焦国内市场，到布局全球网络，吉利始终以“步步为营、久久为功”的耐心，完成了从零部件到整车、从低端到高端、从区域到全球的三级跳。正如当年义乌货郎走街串巷积累客源，吉利通过持续优化产品品质与服务，逐步积累起庞大的用户基础与品牌口碑，为后续跨越式发展奠定了坚实基础。</p>
+                
+                <p class="enterprise-paragraph"><strong>（二）勇于开拓，打破行业壁垒</strong><br>
+                鸡毛换糖文化中“走南闯北、敢闯敢试”的开拓精神，在吉利身上升华为突破行业垄断、开拓全球市场的勇气。2001年，吉利成为中国首家获得轿车生产资质的民营企业，打破了长期以来国有企业与外资品牌对汽车市场的双重垄断，成为民营汽车品牌的“破冰者”——这一举措，恰似当年义乌货郎突破地域限制、拓展交易范围的创新实践。</p>
+                <p class="enterprise-paragraph">最具里程碑意义的开拓，是2010年以18亿美元全资收购福特旗下沃尔沃轿车业务的“蛇吞象”之举。彼时的吉利年利润不足12亿元人民币，而沃尔沃作为拥有80余年历史的豪华品牌，虽处于连续十年亏损的低谷，但手握2000余项汽车安全专利、两大模块化架构及覆盖60国的销售网络。这场被全球媒体质疑的并购，最终成为中国车企全球化的典范：吉利采取“独立运营、技术反哺”策略，既保留了沃尔沃的品牌调性与研发体系，又通过联合研发实现技术共享，让中国自主品牌首次掌握了豪华车核心技术。此后，吉利又收购路特斯等国际品牌，进一步完善全球产业布局，真正开创了中国车企全球化发展的先河。</p>
+
+                <h4 class="enterprise-subtitle">二、商业模式亮点：构建全球化智能出行生态</h4>
+                <p class="enterprise-paragraph">吉利构建了覆盖从经济型到豪华级、从燃油车到新能源的全谱系品牌矩阵，实现差异化竞争与市场全覆盖。依托收购沃尔沃带来的技术积淀，构建了“全球协同、技术共享”的研发网络，形成了独特的技术护城河。同时借鉴鸡毛换糖“走出去”的开拓精神，构建了“研发全球化、生产本地化、市场国际化”的运营格局。</p>
+                
+                <h4 class="enterprise-subtitle">三、核心成就：中国自主品牌的全球标杆</h4>
+                <p class="enterprise-paragraph">吉利已连续12年跻身《财富》世界500强，2025年排名跃升至第155位，同比上升30位，成为中国自主品牌的领军者。2024年，吉利集团营收首次突破2400亿元，同比增长34%；净利润166亿元，同比激增213%，盈利能力大幅超越行业平均水平。如今的吉利已不再是单一的汽车制造商，而是形成了覆盖汽车制造、新能源科技、智能驾驶、出行服务、金融服务等多领域的产业生态，推动了中国汽车产业的转型升级。</p>
+            </div>
+
+            <!-- 义乌小商品城 -->
+            <div class="enterprise-section">
+                <h3 class="enterprise-title">义乌小商品城：鸡毛换糖精神孕育的全球贸易帝国</h3>
+                <p class="enterprise-paragraph">从1982年湖清门的露天“马路市场”到2025年全球数贸中心的数字化跃迁，从货郎肩挑的糖担到覆盖230多个国家和地区的贸易网络，义乌小商品城（以下简称“义乌市场”）的发展轨迹，是鸡毛换糖精神最鲜活、最完整的现代演绎。作为全球最大的小商品批发市场，它以“积少成多、灵活变通、诚信立市”为核心密码，完成了从地摊集市到“世界超市”的传奇跨越，成为浙商精神在商贸领域的终极实践样本。</p>
+                
+                <h4 class="enterprise-subtitle">一、精神传承：鸡毛换糖基因的当代延续</h4>
+                <p class="enterprise-paragraph">鸡毛换糖“不以利小而不为”的务实内核，在义乌市场的发展中沉淀为“小商品、大市场”的核心逻辑。1982年，义乌县委、县政府顺应民意开放湖清门小百货市场，705个简陋摊位撑起了第一代义乌市场的雏形，经营的纽扣、针线、发卡等小商品单价不过几分几角，却凭借薄利多销的模式迅速积累人气。如今，义乌市场已构建起涵盖26个大类、210万种单品的庞大商贸体系，单个纽扣利润不足1分钱，却能年销数十亿颗；普通吸管单价仅0.005元，全球每四根吸管就有一根来自义乌。这种“聚沙成塔、集腋成裘”的经营哲学，正是鸡毛换糖精神最生动的当代诠释。</p>
+                
+                <h4 class="enterprise-subtitle">二、商业模式亮点：构建全球小商品贸易生态</h4>
+                <p class="enterprise-paragraph">义乌市场以“无所不有”的品类优势构建起独特壁垒，形成了“只要地球人需要的小商品，义乌都能提供”的市场认知。面对数字经济浪潮，义乌市场率先完成从“实体市场”到“数字生态”的转型，构建起覆盖“人、货、场、链”的全链路数字化体系。同时借鉴鸡毛换糖“走南闯北、开拓市场”的精神，构建起多层次、立体化的全球出海网络，推动“买卖全球”向“品牌全球”升级。</p>
+                
+                <h4 class="enterprise-subtitle">三、核心成就：世界小商品之都的标杆地位</h4>
+                <p class="enterprise-paragraph">义乌市场已连续33年位居全国专业市场成交额榜首，在册市场经营主体突破110万户，从业人员超21万人，市场经营面积达640余万平方米，商位7.5万个，形成了全球规模最大、配套最完善的小商品贸易集群。2024年，义乌外贸进出口总额突破4500亿元，210万种商品通过海、陆、空、网四大通道发往全球230多个国家和地区。如今的义乌已不再是单一的批发市场，而是形成了覆盖生产、贸易、物流、金融、服务的全产业链生态，其发展历程为全球中小商户创业、区域经济转型提供了宝贵经验。</p>
+            </div>
+
+            <!-- 阿里巴巴集团 -->
+            <div class="enterprise-section">
+                <h3 class="enterprise-title">阿里巴巴集团：数字时代鸡毛换糖精神的创新史诗</h3>
+                <p class="enterprise-paragraph">从1999年杭州湖畔花园的18人草根团队，到业务遍及220多个国家和地区的数字经济生态帝国，阿里巴巴集团（以下简称“阿里”）的发展轨迹，是鸡毛换糖精神在数字时代的极致升华。它以“勇于开拓、灵活变通、诚信务实”为精神密码，将货郎走街串巷的民间智慧，升级为“让天下没有难做的生意”的全球商业生态，成为浙商精神在数字经济领域的终极实践样本。</p>
+                
+                <h4 class="enterprise-subtitle">一、精神传承：鸡毛换糖基因的数字升华</h4>
+                <p class="enterprise-paragraph">鸡毛换糖时代“走南闯北、敢为人先”的开拓精神，在阿里身上升华为突破传统贸易格局、开拓数字新赛道的勇气。上世纪90年代末，中国互联网尚处萌芽阶段，国际贸易受信息壁垒、渠道垄断等问题制约，中小企业“出海难、接单难”成为普遍痛点。此时的阿里，如同当年肩挑货担闯荡四方的义乌货郎，率先嗅到市场机遇，果断切入B2B电商赛道，打造阿里巴巴国际站，成为连接中国中小企业与全球采购商的“数字桥梁”。</p>
+                <p class="enterprise-paragraph">传承鸡毛换糖“顺势而为、应变求变”的生存智慧，阿里历经三次关键转型，从单一电商平台成长为覆盖“电商、云服务、物流、支付”的全产业链生态，始终保持对市场变化的敏锐响应。2003年从B2B向C2C转型推出淘宝，解决个人创业就业需求；2008年上线天猫，切入品牌电商赛道，满足消费升级趋势；2009年布局阿里云，提前抢占数字经济基础设施赛道，如今阿里云已成为全球三大云计算服务商之一。</p>
+
+                <h4 class="enterprise-subtitle">二、商业模式亮点：数字生态的协同进化之路</h4>
+                <p class="enterprise-paragraph">阿里构建了“平台赋能+产业协同”的独特商业模式，如同当年鸡毛换糖形成的“货郎+农户”协作网络，但实现了数字化、规模化升级。同时将鸡毛换糖“走出去”的开拓精神，升级为技术驱动的全球化布局，构建起“研发全球化、市场本地化、服务数字化”的运营格局。始终坚守“让天下没有难做的生意”的核心使命，如同鸡毛换糖“不以利小而不为”的务实追求，持续为生态伙伴创造价值。</p>
+                
+                <h4 class="enterprise-subtitle">三、核心成就：数字经济的全球标杆</h4>
+                <p class="enterprise-paragraph">阿里已成长为全球领先的数字经济生态企业，2025财年淘天集团和国际数字商业集团合计贡献58.4%的营收，继续扮演压舱石角色。旗下拥有淘宝、天猫、阿里云、菜鸟、支付宝等多个行业领先品牌，形成了覆盖消费、产业、科技、金融的完整生态。其生态化发展不仅创造了自身的商业成功，更带动了上下游产业链的协同升级，向全球输出了数字时代的商业文明。</p>
+            </div>
+
+            <!-- 张小泉（完整警示案例） -->
+            <div class="enterprise-section">
+                <h3 class="enterprise-title">张小泉：背离初心的老字号陨落警示</h3>
+                <p class="enterprise-paragraph">从明崇祯元年（公元1628年）创立至今，拥有近400年历史的张小泉，曾是浙商传统制造业的璀璨名片，其剪刀锻制技艺被列为首批国家级非物质文化遗产，“良钢精作”的古训曾是浙商匠心精神的标杆。然而，这家承载着百年匠心的中华老字号，却在近年因背离鸡毛换糖“诚信务实、创新求变、深耕主业”的精神内核，陷入品牌危机与经营困境，从上市时的46亿市值跌至不足15亿，沦为老字号转型失败的典型样本，为所有浙商企业敲响了警钟。</p>
+                
+                <h4 class="enterprise-subtitle">一、核心问题：背离鸡毛换糖精神的三重误区</h4>
+                <p class="enterprise-paragraph"><strong>（一）丧失诚信务实底线，透支百年品牌信誉</strong><br>
+                鸡毛换糖精神的核心是“以诚立商”，早年“敲糖帮”靠公平交易、童叟无欺的口碑行商四方，而张小泉却在发展中逐渐抛弃了这一核心底线，导致品牌信任度彻底崩塌。2022年“拍蒜断刀”事件成为导火索：消费者用张小泉菜刀拍蒜时刀具断裂，客服却给出“菜刀不能拍蒜”的荒谬回应，时任总经理更发表“中国人切菜方法不对”的傲慢言论，公然质疑中国消费者的使用习惯，引发全网舆论哗然，品牌形象遭受毁灭性打击，最终被中国消费者协会列入年度十大消费维权热点榜单。</p>
+                <p class="enterprise-paragraph">诚信危机并未让张小泉警醒，反而采取“刷单控评”的短视行为，2022年12月至2023年4月，其全资子公司组织员工在电商平台刷单虚构交易，被监管部门查实后处以25万元罚款，进一步加剧了消费者的信任危机。更严重的是，控股股东深陷债务泥潭后，通过高比例分红转移上市公司资金，2021年至2024年累计派发现金红利1.58亿元，占同期累计净利润的76%，被市场质疑为“掏空式分红”，用于缓解控股股东自身债务压力，而非投入产品研发与品牌建设。</p>
+                
+                <p class="enterprise-paragraph"><strong>（二）缺乏创新求变能力，固守传统错失机遇</strong><br>
+                鸡毛换糖精神的生命力在于“灵活变通”，而张小泉在消费升级与行业变革的浪潮中，固守传统、缺乏创新，最终被市场淘汰。长期以来，张小泉的核心产品仍以传统刀剪为主，产品功能、设计理念停滞不前，未能跟上消费者对厨具多样化、智能化、场景化的需求变化。更致命的是“重营销轻研发”的战略失衡，销售费用远高于行业平均水平，而研发投入却常年不足营收的3%，最终在市场竞争中节节败退。</p>
+
+                <h4 class="enterprise-subtitle">二、核心警示：老字号的传承在于守正创新</h4>
+                <p class="enterprise-paragraph">张小泉的陨落，为所有浙商企业、尤其是老字号企业提供了深刻警示：<strong>传承不是固守，创新不能忘本。</strong>鸡毛换糖精神历久弥新的关键，在于“守正”与“创新”的辩证统一——守的是“诚信务实、深耕主业”的初心，创的是“灵活变通、勇于开拓”的方法。</p>
+                <p class="enterprise-paragraph">对于老字号而言，百年品牌是宝贵的无形资产，但绝非躺在功劳簿上的资本。唯有以“毫厘争取”的匠心打磨产品，以“敢闯敢创”的勇气拥抱变革，以“诚信包容”的胸怀对待消费者，才能让老字号在新时代焕发新生。这正是张小泉案例留给浙商精神最沉重、也最珍贵的启示。</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- 页脚 -->
+<footer id="footer">
+    <div class="footer-slogan">传承鸡毛换糖精神，续写新时代浙商传奇</div>
+    <div class="footer-copyright">
+        © 2026 鸡毛换糖精神传承项目 · 义乌<br>
+        从拨浪鼓到世界超市，让浙商精神永流传
+    </div>
+    <div class="footer-links">
+        <a href="#spirit-core">返回顶部</a>
+        <a href="#enterprises">典型企业</a>
+        <a href="https://www.yw.gov.cn/" target="_blank">义乌市人民政府</a>
+    </div>
+</footer>
+
+<!-- 返回顶部按钮 -->
+<div class="back2top" id="back2top" onclick="scrollToTop()">↑</div>
+
+<!-- 人物故事弹窗 -->
+<div class="story-modal" id="storyModal">
+    <div class="story-content">
+        <div class="story-header">
+            <span class="story-close" onclick="closeModal()">×</span>
+            <h3 id="storyName">人物故事</h3>
+            <div class="story-category" id="storyCategory">传承者</div>
+        </div>
+        <div class="story-body" id="storyBody">
+            <!-- 故事内容将通过JS动态填充 -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // ========== 导航栏与滚动交互 ==========
+    const topNav = document.getElementById('topNav');
+    const back2top = document.getElementById('back2top');
+    const progressBar = document.getElementById('progressBar');
+    const mobileNav = document.getElementById('mobileNav');
+    const storyModal = document.getElementById('storyModal');
+
+    // 滚动监听
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        // 更新进度条
+        progressBar.style.width = scrollPercent + '%';
+        
+        // 导航栏样式变化
+        if (scrollTop > 50) {
+            topNav.classList.add('scrolled');
+        } else {
+            topNav.classList.remove('scrolled');
+        }
+        
+        // 返回顶部按钮显示
+        if (scrollTop > 400) {
+            back2top.classList.add('visible');
+        } else {
+            back2top.classList.remove('visible');
+        }
+
+        // 滚动激活导航项（增强版锚点精准定位）
+        const sections = document.querySelectorAll('.content-block');
+        const navLinks = document.querySelectorAll('.nav-menu li a, .mobile-nav a');
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    });
+
+    // 移动端菜单切换
+    function toggleMobileMenu() {
+        if (mobileNav.style.display === 'flex') {
+            mobileNav.style.display = 'none';
+        } else {
+            mobileNav.style.display = 'flex';
+        }
+    }
+
+    // 点击移动端链接后关闭菜单
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileNav.style.display = 'none';
+        });
+    });
+
+    // 返回顶部
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // ========== 人物卡片弹窗交互 ==========
+    document.querySelectorAll('.person-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const name = this.getAttribute('data-name');
+            const category = this.getAttribute('data-category');
+            const story = this.getAttribute('data-story');
+            
+            document.getElementById('storyName').textContent = name;
+            document.getElementById('storyCategory').textContent = category;
+            document.getElementById('storyBody').innerHTML = story.split('\n').map(p => `<p>${p}</p>`).join('');
+            
+            storyModal.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeModal() {
+        storyModal.classList.remove('visible');
+        document.body.style.overflow = '';
+    }
+
+    // 点击弹窗外部关闭
+    storyModal.addEventListener('click', function(e) {
+        if (e.target === storyModal) {
+            closeModal();
+        }
+    });
+
+    // ESC键关闭弹窗
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // ========== 搜索功能 ==========
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const query = this.value.trim();
+            if (query) {
+                alert('搜索功能演示：您搜索了 "' + query + '"\n\n在完整项目中，这里会跳转到搜索结果页。');
+                // 实际项目中可替换为页面内高亮或跳转逻辑
+            }
+        }
+    });
+
+    // 初始化：确保页面加载完成后触发一次滚动检查
+    window.addEventListener('load', function() {
+        window.dispatchEvent(new Event('scroll'));
+    });
+</script>
+
+</body>
+</html>
